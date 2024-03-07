@@ -13,4 +13,7 @@
   <packaging>pom</packaging>
   <name>TrainingConfigs_module</name>
   <description>TrainingConfigs_module</description>
+  <modules>
+    <module>api/csr-accounts</module>
+  </modules>
 </project>
