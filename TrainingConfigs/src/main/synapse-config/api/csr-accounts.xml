@@ -2,6 +2,9 @@
 <api context="/default" name="csr-accounts" xmlns="http://ws.apache.org/ns/synapse">
     <resource methods="GET" uri-template="/accounts-by-name">
         <inSequence>
+            <log level="custom">
+                <property expression="$trp:user_id" name="user_id"/>
+            </log>
             <header name="client_id" scope="transport" value="6d9e329147164bf08a2cc4eeb075252e"/>
             <header name="client_secret" scope="transport" value="B20a21B05dBb4287a7C49076D6E0d377"/>
             <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
@@ -42,6 +45,11 @@
             </filter>
             <header expression="json-eval($.length())" name="number_of_accounts" scope="transport"/>
             <header expression="$ctx:user_id" name="csr_user_id" scope="transport"/>
+            <log level="custom">
+                <property expression="$ctx:user_id" name="user_idf"/>
+                <property expression="$trp:account_name" name="account_name"/>
+                <property expression="$trp:number_of_accounts" name="account_number"/>
+            </log>
             <loopback/>
         </inSequence>
         <outSequence>
@@ -51,6 +59,9 @@
     </resource>
     <resource methods="GET" uri-template="/accounts-by-type">
         <inSequence>
+            <log level="custom">
+                <property expression="$trp:user_id" name="UserId"/>
+            </log>
             <header name="client_id" scope="transport" value="6d9e329147164bf08a2cc4eeb075252e"/>
             <header name="client_secret" scope="transport" value="B20a21B05dBb4287a7C49076D6E0d377"/>
             <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
@@ -92,6 +103,11 @@
             </filter>
             <header expression="json-eval($.length())" name="number_of_accounts" scope="transport"/>
             <header expression="$ctx:user_id" name="csr_user_id" scope="transport"/>
+            <log level="custom">
+                <property expression="$ctx:user_id" name="User_Id"/>
+                <property expression="$trp:number_of_accounts" name="Account_Number"/>
+                <property expression="$trp:account_type" name="Account_Type"/>
+            </log>
             <loopback/>
         </inSequence>
         <outSequence>
