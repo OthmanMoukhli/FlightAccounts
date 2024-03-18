@@ -115,4 +115,40 @@
         </outSequence>
         <faultSequence/>
     </resource>
+    <resource methods="POST" uri-template="/accounts">
+        <inSequence>
+            <header name="client_id" scope="transport" value="6d9e329147164bf08a2cc4eeb075252e"/>
+            <header name="client_secret" scope="transport" value="B20a21B05dBb4287a7C49076D6E0d377"/>
+            <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
+            <property expression="json-eval($.length())" name="number_of_accounts" scope="default" type="INTEGER"/>
+            <clone>
+                <target>
+                    <sequence>
+                        <log level="full"/>
+                        <store description="Post Account" messageStore="AccountMessageStore"/>
+                        <log/>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <log level="full" separator="."/>
+                        <payloadFactory media-type="json">
+                            <format>{&#xd;
+									message: "Accounts submitted"&#xd;
+								}
+							</format>
+                            <args/>
+                        </payloadFactory>
+                        <header expression="$ctx:number_of_accounts" name="number_of_accounts" scope="transport"/>
+                        <header expression="$ctx:user_id" name="csr_user_id" scope="transport"/>
+                        <log level="full"/>
+                        <respond/>
+                    </sequence>
+                </target>
+            </clone>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
 </api>

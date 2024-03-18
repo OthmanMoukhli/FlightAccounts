@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="PostAccountSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full" separator="."/>
+    <call>
+        <endpoint key="PostAccounts"/>
+    </call>
+    <log level="full"/>
+    <drop/>
+</sequence>
