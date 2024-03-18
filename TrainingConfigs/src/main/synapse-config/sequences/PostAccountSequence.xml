@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="PostAccountSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log level="full" separator="."/>
+    <header name="client_id" scope="transport" value="6d9e329147164bf08a2cc4eeb075252e"/>
+    <header name="client_secret" scope="transport" value="B20a21B05dBb4287a7C49076D6E0d377"/>
     <call>
         <endpoint key="PostAccounts"/>
     </call>
