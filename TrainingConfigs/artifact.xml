@@ -14,4 +14,16 @@
     <artifact name="PostAccountMessageProcessor" groupId="com.example.message-processors" version="1.0.0" type="synapse/message-processors" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/message-processors/PostAccountMessageProcessor.xml</file>
     </artifact>
+    <artifact name="AuthenticationRequestHeaderSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/AuthenticationRequestHeaderSequence.xml</file>
+    </artifact>
+    <artifact name="ResponseHeadersSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ResponseHeadersSequence.xml</file>
+    </artifact>
+    <artifact name="config" groupId="com.example.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/config.xml</file>
+    </artifact>
+    <artifact name="EndpointConfigSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/EndpointConfigSequence.xml</file>
+    </artifact>
 </artifacts>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="config" xmlns="http://ws.apache.org/ns/synapse">
+    <params xmlns="">
+        <client_id>6d9e329147164bf08a2cc4eeb075252e</client_id>
+        <client_secret>B20a21B05dBb4287a7C49076D6E0d377</client_secret>
+        <backend_endpoint>
+            <protocol>http</protocol>
+            <host>diy-accounts-api.us-w2.cloudhub.io</host>
+            <port>80</port>
+            <path>accounts</path>
+        </backend_endpoint>
+    </params>
+</localEntry>

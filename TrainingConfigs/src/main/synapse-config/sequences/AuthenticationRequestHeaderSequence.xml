@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="AuthenticationRequestHeaderSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <header expression="get-property('config')/client_id" name="client_id" scope="transport"/>
+    <header expression="get-property('config')/client_secret" name="client_secret" scope="transport"/>
+    <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
+</sequence>

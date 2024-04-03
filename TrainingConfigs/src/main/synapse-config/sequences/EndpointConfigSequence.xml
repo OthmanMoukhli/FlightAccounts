@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="EndpointConfigSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="get-property('config')/backend_endpoint/protocol" name="uri.var.protocol" scope="default" type="STRING"/>
+    <property expression="get-property('config')/backend_endpoint/host" name="uri.var.host" scope="default" type="STRING"/>
+    <property expression="get-property('config')/backend_endpoint/port" name="uri.var.port" scope="default" type="STRING"/>
+    <property expression="get-property('config')/backend_endpoint/path" name="uri.var.path" scope="default" type="STRING"/>
+</sequence>

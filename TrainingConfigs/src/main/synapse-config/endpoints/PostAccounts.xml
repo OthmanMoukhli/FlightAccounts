@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="PostAccounts" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="http://diy-accounts-api.us-w2.cloudhub.io:80/accounts">
+    <http method="post" uri-template="{uri.var.protocol}://{uri.var.host}:{uri.var.port}/{uri.var.path}">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>

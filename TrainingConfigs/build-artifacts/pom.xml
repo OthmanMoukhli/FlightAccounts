@@ -15,5 +15,9 @@
   <description>TrainingConfigs_module</description>
   <modules>
     <module>api/csr-accounts</module>
+    <module>sequences/AuthenticationRequestHeaderSequence</module>
+    <module>sequences/ResponseHeadersSequence</module>
+    <module>local-entries/config</module>
+    <module>sequences/EndpointConfigSequence</module>
   </modules>
 </project>

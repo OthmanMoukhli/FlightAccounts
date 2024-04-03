@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ResponseHeadersSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <header expression="json-eval($.length())" name="number_of_accounts" scope="transport"/>
+    <header expression="$ctx:user_id" name="csr_user_id" scope="transport"/>
+</sequence>
