@@ -5,43 +5,14 @@
             <log level="custom">
                 <property expression="$trp:user_id" name="user_id"/>
             </log>
-            <sequence key="AuthenticationRequestHeaderSequence"/>
-            <sequence key="EndpointConfigSequence"/>
-            <filter xpath="$ctx:query.param.account_name">
-                <then>
-                    <call>
-                        <endpoint>
-                            <http method="get" uri-template="{uri.var.protocol}://{uri.var.host}:{uri.var.port}/{uri.var.path}?account_name={query.param.account_name}">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
-                    <header expression="$ctx:query.param.account_name" name="account_name" scope="transport"/>
-                </then>
-                <else>
-                    <call>
-                        <endpoint>
-                            <http method="get" uri-template="{uri.var.protocol}://{uri.var.host}:{uri.var.port}/{uri.var.path}">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
-                </else>
-            </filter>
+            <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
+            <flightaccounts.getAccounts>
+                <account_name>{get-property('query.param.account_name')}</account_name>
+                <user_id>{$trp:user_id}</user_id>
+                <client_id>{get-property('config')/client_id}</client_id>
+                <client_secret>{get-property('config')/client_secret}</client_secret>
+            </flightaccounts.getAccounts>
+            <header expression="$ctx:query.param.account_name" name="account_name" scope="transport"/>
             <sequence key="ResponseHeadersSequence"/>
             <log level="custom">
                 <property expression="$ctx:user_id" name="user_idf"/>
@@ -60,41 +31,24 @@
             <log level="custom">
                 <property expression="$trp:user_id" name="UserId"/>
             </log>
-            <sequence key="AuthenticationRequestHeaderSequence"/>
-            <sequence key="EndpointConfigSequence"/>
+            <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
             <filter xpath="$ctx:query.param.account_type">
                 <then>
-                    <call>
-                        <endpoint>
-                            <http method="get" uri-template="{uri.var.protocol}://{uri.var.host}:{uri.var.port}/{uri.var.path}?account_type={query.param.account_type}">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
+                    <flightaccounts.getAccounts>
+                        <account_type>{get-property('query.param.account_type')}</account_type>
+                        <user_id>{$trp:user_id}</user_id>
+                        <client_id>{get-property('config')/client_id}</client_id>
+                        <client_secret>{get-property('config')/client_secret}</client_secret>
+                    </flightaccounts.getAccounts>
                     <header expression="$ctx:query.param.account_type" name="account_type" scope="transport"/>
                 </then>
                 <else>
-                    <call>
-                        <endpoint>
-                            <http method="get" uri-template="{uri.var.protocol}://{uri.var.host}:{uri.var.port}/{uri.var.path}?account_type=business">
-                                <suspendOnFailure>
-                                    <initialDuration>-1</initialDuration>
-                                    <progressionFactor>-1</progressionFactor>
-                                    <maximumDuration>0</maximumDuration>
-                                </suspendOnFailure>
-                                <markForSuspension>
-                                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                                </markForSuspension>
-                            </http>
-                        </endpoint>
-                    </call>
+                    <flightaccounts.getAccounts>
+                        <account_type>business</account_type>
+                        <user_id>{$trp:user_id}</user_id>
+                        <client_id>{get-property('config')/client_id}</client_id>
+                        <client_secret>{get-property('config')/client_secret}</client_secret>
+                    </flightaccounts.getAccounts>
                     <header name="account_type" scope="transport" value="business"/>
                 </else>
             </filter>
@@ -119,12 +73,12 @@
                     <sequence>
                         <log level="full"/>
                         <store description="Post Account" messageStore="AccountMessageStore"/>
-                        <log level="full" separator="************************************* After Store Message ***************************************"/>
+                        <log level="full" separator=","/>
                     </sequence>
                 </target>
                 <target>
                     <sequence>
-                        <log level="full" separator="."/>
+                        <log level="full" separator=","/>
                         <payloadFactory media-type="json">
                             <format>{&#xd;
 	message: "Accounts submitted"&#xd;

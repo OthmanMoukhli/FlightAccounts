@@ -13,4 +13,7 @@
   <packaging>pom</packaging>
   <name>TrainingConnectorExporter_module</name>
   <description>TrainingConnectorExporter_module</description>
+  <modules>
+    <module>lib/flightaccounts-connector-1.0.0</module>
+  </modules>
 </project>

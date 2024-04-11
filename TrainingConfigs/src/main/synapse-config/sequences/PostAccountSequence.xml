@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="PostAccountSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <log level="full" separator="."/>
-    <sequence key="AuthenticationRequestHeaderSequence"/>
-    <sequence key="EndpointConfigSequence"/>
-    <call>
-        <endpoint key="PostAccounts"/>
-    </call>
+    <log level="full" separator=","/>
+    <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
+    <flightaccounts.createAccount>
+        <user_id>{$trp:user_id}</user_id>
+        <client_id>{get-property('config')/client_id}</client_id>
+        <client_secret>{get-property('config')/client_secret}</client_secret>
+    </flightaccounts.createAccount>
     <log level="full"/>
     <drop/>
 </sequence>
