@@ -19,5 +19,6 @@
     <module>sequences/ResponseHeadersSequence</module>
     <module>local-entries/config</module>
     <module>sequences/EndpointConfigSequence</module>
+    <module>api/csr-transactions</module>
   </modules>
 </project>

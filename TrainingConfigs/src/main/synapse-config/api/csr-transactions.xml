@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/soap" name="csr-transactions" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/accounts/{customer_id}/transactions">
+        <inSequence>
+            <property expression="$trp:user_id" name="user_id" scope="default" type="INTEGER"/>
+            <payloadFactory media-type="xml">
+                <format>
+                    <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                        <Body>
+                            <GetTransactionsforCustomers xmlns="http://soap.training.mulesoft.com/">
+                                <customerID xmlns="">$1</customerID>
+                            </GetTransactionsforCustomers>
+                        </Body>
+                    </Envelope>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('uri.var.customer_id')"/>
+                </args>
+            </payloadFactory>
+            <call>
+                <endpoint>
+                    <wsdl port="TransactionsServiceImplPort" service="TransactionsServiceService" uri="http://mu.mule-training.com/transactions?wsdl">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </wsdl>
+                </endpoint>
+            </call>
+            <header expression="get-property('user_id')" name="csr_user_id" scope="transport"/>
+            <header expression="get-property('uri.var.customer_id')" name="account_id" scope="transport"/>
+            <header expression="count($body//return)" name="number_of_transactions" scope="transport"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

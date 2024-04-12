@@ -26,4 +26,7 @@
     <artifact name="EndpointConfigSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/EndpointConfigSequence.xml</file>
     </artifact>
+    <artifact name="csr-transactions" groupId="com.example.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/csr-transactions.xml</file>
+    </artifact>
 </artifacts>
